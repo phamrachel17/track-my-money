@@ -3,8 +3,8 @@ const cors = require('cors')        // import cors
 const {db} = require('./db/db')     // import db.js
 const {readdirSync} = require('fs') // imporrt from fs module
 const app = express()               // create app using express 
-require('dotenv').config()      // so we can use our PORT env variable
 
+require('dotenv').config()      // so we can use our PORT env variable
 const PORT = process.env.PORT
 
 // MIDDLEWARES
@@ -16,11 +16,11 @@ when you're building APIs that need to be accessed from different domains or ori
 */
 app.use(cors())      
 
-// app.get('/', (req, res)=> {
-//     res.send('Hello Homepage')
-// })
-
 // ROUTES
+/*
+    So, for each route file in the ./routes directory, this code will require the module and attach 
+    its exported router to the main Express.js app under the /api/v1 base path.
+*/
 readdirSync('./routes').map((route) => app.use('/api/v1', require('./routes/' + route)))
 
 const server = () => {
@@ -31,3 +31,8 @@ const server = () => {
 }
 
 server()
+
+
+// app.get('/', (req, res)=> {
+//     res.send('Hello Homepage')
+// })
