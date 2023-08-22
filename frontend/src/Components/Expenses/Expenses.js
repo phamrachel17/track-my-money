@@ -4,27 +4,26 @@ import { InnerLayout } from '../../Styles/Layout'
 import { useGlobalContext } from '../../Context/globalContext'
 import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from '../Form/ExpenseForm'
-import Form from '../Form/Form'
 
 function Expenses() {
-    const {addExpense, expenses, getExpenses, deleteExpense, totalExpenses} = useGlobalContext()
+    const {addExpense, expenses, getExpense, deleteExpense, totalExpenses} = useGlobalContext()
 
     useEffect(() =>{
-        getExpenses()
+        getExpense()
     }, [])
     return (
         <ExpenseStyled>
             <InnerLayout>
                 <h1>Expenses</h1>
-                <h2 className="total-income">Total Expense: <span>${totalExpenses()}</span></h2>
-                <div className="income-content">
+                <h2 className="total-expense">Total Expense: <span>${totalExpenses()}</span></h2>
+                <div className="expense-content">
                     <div className="form-container">
                         <ExpenseForm />
                     </div>
-                    <div className="incomes">
-                        {expenses.map((income) => {
-                            const {_id, title, amount, date, category, description, type} = income;
-                            console.log(income)
+                    <div className="expenses">
+                        {expenses.map((expense) => {
+                            const {_id, title, amount, date, category, description, type} = expense;
+                            console.log(expense)
                             return <IncomeItem
                                 key={_id}
                                 id={_id} 
@@ -48,7 +47,7 @@ function Expenses() {
 const ExpenseStyled = styled.div`
     display: flex;
     overflow: auto;
-    .total-income{
+    .total-expense{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -66,10 +65,10 @@ const ExpenseStyled = styled.div`
             color: var(--color-green);
         }
     }
-    .income-content{
+    .expense-content{
         display: flex;
         gap: 2rem;
-        .incomes{
+        .expenses{
             flex: 1;
         }
     }

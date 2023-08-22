@@ -5,7 +5,7 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from '../../Context/globalContext';
 import Button from '../Button/Button';
-import { plus } from '../../utils/icons';
+import { plus } from '../../Utils/icons';
 
 function Form() {
     const {addIncome, getIncomes, error, setError} = useGlobalContext()
@@ -62,7 +62,7 @@ function Form() {
                     id='date'
                     placeholderText='Enter A Date'
                     selected={date}
-                    dateFormat="dd/MM/yyyy"
+                    dateFormat="MM/dd/yyyy"
                     onChange={(date) => {
                         setInputState({...inputState, date: date})
                     }}

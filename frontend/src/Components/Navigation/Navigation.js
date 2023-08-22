@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import pfp from '../../Images/pfp.jpeg'
-import { menuItems } from '../../utils/menuitems'
-import {signout} from '../../utils/icons'
+import { menuItems } from '../../Utils/menuitems'
+import {signout} from '../../Utils/icons'
 
 function Navigation({active, setActive}) {
     return (
