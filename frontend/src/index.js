@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './Styles/GlobalStyle';
 import { GlobalProvider } from './Context/globalContext';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

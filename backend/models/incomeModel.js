@@ -33,6 +33,12 @@ const IncomeSchema = new mongoose.Schema({
         maxLength: 100,
         trim: true
     },
-    }, {timestanps: true})      // activate timestamp when we create/update an item
+    // name: {
+    //     type: String,
+    //     required: true,
+    //     maxLength: 100,
+    //     trim: true
+    // },
+    }, {timestamps: true})      // activate timestamp when we create/update an item
 
     module.exports = mongoose.model('Income', IncomeSchema)
