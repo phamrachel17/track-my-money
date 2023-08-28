@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    display-picture: {
+    displaypicture: {
         type: String
     },
     }, {timestamps: true})      // activate timestamp when we create/update an item

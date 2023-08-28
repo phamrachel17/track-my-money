@@ -6,6 +6,8 @@ const app = express()               // create app using express
 
 require('dotenv').config()      // so we can use our PORT env variable
 const PORT = process.env.PORT
+//const userRoutes = require('./routes/user')
+
 
 // MIDDLEWARES
 app.use(express.json())     // we want our data to be in JSON
