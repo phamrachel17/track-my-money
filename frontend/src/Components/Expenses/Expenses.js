@@ -4,11 +4,11 @@ import { InnerLayout } from '../../Styles/Layout'
 import { useGlobalContext } from '../../Context/globalContext'
 import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from '../Form/ExpenseForm'
-import { useAuthContext } from '../../Context/authContext'
+// import { useAuthContext } from '../../Context/authContext'
 
 function Expenses() {
     const {addExpense, expenses, getExpense, deleteExpense, totalExpenses} = useGlobalContext()
-    const { user } = useAuthContext()
+    // const { user } = useAuthContext()
 
     useEffect(() =>{
         getExpense()

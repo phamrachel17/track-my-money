@@ -7,7 +7,7 @@ import Form from '../Form/IncomeForm'
 
 function Income() {
     const {addIncome, incomes, getIncomes, deleteIncome, totalIncome} = useGlobalContext()
-    const { user } = useAuthContext()
+    // const { user } = useAuthContext()
     
     useEffect(() =>{        // hook to get data from backend/database
         getIncomes()

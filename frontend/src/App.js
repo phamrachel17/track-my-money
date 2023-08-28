@@ -7,42 +7,42 @@ import Navigation from './Components/Navigation/Navigation';
 import Income from './Components/Income/Income';
 import Expenses from './Components/Expenses/Expenses';
 import Dashboard from './Components/Dashboard/Dashboard';
-import firebase from "firebase/app"
-import "firebase/auth"
+// import firebase from "firebase/app"
+// import "firebase/auth"
 import { useGlobalContext } from './Context/globalContext';
 
 function App() {
   
-  const [auth, setAuth] = useState(
-		false || window.localStorage.getItem('auth') === 'true'
-	);
-	const [token, setToken] = useState('');
+  // const [auth, setAuth] = useState(
+	// 	false || window.localStorage.getItem('auth') === 'true'
+	// );
+	// const [token, setToken] = useState('');
 
-	useEffect(() => {
-		firebase.auth().onAuthStateChanged((userCred) => {
-			if (userCred) {
-				setAuth(true);
-				window.localStorage.setItem('auth', 'true');
-        setActive(0);
-				userCred.getIdToken().then((token) => {
-					setToken(token);
-				});
-			}
-		});
-	}, []);
+	// useEffect(() => {
+	// 	firebase.auth().onAuthStateChanged((userCred) => {
+	// 		if (userCred) {
+	// 			setAuth(true);
+	// 			window.localStorage.setItem('auth', 'true');
+  //       setActive(0);
+	// 			userCred.getIdToken().then((token) => {
+	// 				setToken(token);
+	// 			});
+	// 		}
+	// 	});
+	// }, []);
 
-	const loginWithGoogle = () => {
-		firebase
-			.auth()
-			.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-			.then((userCred) => {
-				if (userCred) {
-					setAuth(true);
-					window.localStorage.setItem('auth', 'true');
-          setActive(1);
-				}
-			});
-	};
+	// const loginWithGoogle = () => {
+	// 	firebase
+	// 		.auth()
+	// 		.signInWithPopup(new firebase.auth.GoogleAuthProvider())
+	// 		.then((userCred) => {
+	// 			if (userCred) {
+	// 				setAuth(true);
+	// 				window.localStorage.setItem('auth', 'true');
+  //         setActive(1);
+	// 			}
+	// 		});
+	// };
   
   // active state for navigation
   const [active, setActive] = useState(1)  // starts at 1 becuase first menu item is 1
@@ -54,7 +54,7 @@ function App() {
   const displayData = () => {
     switch(active) {
       case 0:
-        return <Login auth={auth} loginWithGoogle={loginWithGoogle} />
+        return <Dashboard />
       case 1:
         return <Dashboard />
       case 2:
@@ -63,7 +63,7 @@ function App() {
         return <Income />
       case 4:
         return <Expenses />
-      default: <Login auth={auth} />
+      default: <Dashboard />
     }
   }
   

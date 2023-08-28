@@ -5,11 +5,11 @@ import History from '../History/History';
 import { InnerLayout } from '../../Styles/Layout';
 import { dollar } from '../../Utils/icons';
 import Chart from '../Chart/Chart';
-import { useAuthContext } from '../../Context/authContext';
+// import { useAuthContext } from '../../Context/authContext';
 
 function Dashboard() {
     const {totalExpenses,incomes, expenses, totalIncome, totalBalance, getIncomes, getExpense } = useGlobalContext()
-    const { user } = useAuthContext()
+    // const { user } = useAuthContext()
 
     useEffect(() => {
         getIncomes()

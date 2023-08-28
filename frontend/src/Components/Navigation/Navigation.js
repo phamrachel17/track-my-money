@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import pfp from '../../Images/pfp.jpeg'
 import { menuItems } from '../../Utils/menuitems'
 import {signout} from '../../Utils/icons'
-import { useAuthContext } from '../../Context/authContext'
+// import { useAuthContext } from '../../Context/authContext'
 
 function Navigation({active, setActive}) {
-    const { user } = useAuthContext();
+    // const { user } = useAuthContext();
     return (
         <NavStyled>
             <div className="user-container">

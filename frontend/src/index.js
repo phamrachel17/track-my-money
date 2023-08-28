@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import firebase from firebase
+// import firebase from firebase
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './Styles/GlobalStyle';
 import { GlobalProvider } from './Context/globalContext';
