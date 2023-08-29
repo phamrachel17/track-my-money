@@ -13,7 +13,8 @@ function IncomeItem({
     description,
     deleteItem,
     indicatorColor,
-    type
+    type,
+    email
 }) {
 
     // change icon based on category from Form.js

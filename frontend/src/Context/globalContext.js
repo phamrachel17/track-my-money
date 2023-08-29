@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import axios from 'axios'
+import { useAuthContext } from "../Hooks/useAuthContext"
 
 /*
     connecting api functions to the frontend
@@ -11,7 +12,7 @@ const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({children}) => {
 
-    const [user, setUser] = useState(null)
+    const user = useAuthContext()
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
     const [error, setError] = useState(null)
@@ -19,7 +20,7 @@ export const GlobalProvider = ({children}) => {
     // setting user
     const loginUser = async (user) => {
         const response = await axios.post(`${BASE_URL}login`, user)
-        setUser(response.data)
+        //setUser(response.data)
     }
 
     //calculate incomes
@@ -28,18 +29,18 @@ export const GlobalProvider = ({children}) => {
             .catch((err) =>{
                 setError(err.response.data.message)
             })
-        getIncomes()
+        getIncomes(user.email)
     }
 
-    const getIncomes = async () => {
-        const response = await axios.get(`${BASE_URL}get-incomes`)
+    const getIncomes = async (email) => {
+        const response = await axios.get(`${BASE_URL}get-incomes/${email}`)
         setIncomes(response.data)
         console.log(response.data)
     }
 
     const deleteIncome = async (id) => {
         const res  = await axios.delete(`${BASE_URL}delete-income/${id}`)
-        getIncomes()
+        getIncomes(user.email)
     }
 
     const totalIncome = () => {
@@ -58,18 +59,18 @@ export const GlobalProvider = ({children}) => {
             .catch((err) =>{
                 setError(err.response.data.message)
             })
-        getExpense()
+        getExpense(user.email)
     }
 
-    const getExpense = async () => {
-        const response = await axios.get(`${BASE_URL}get-expense`)
+    const getExpense = async (email) => {
+        const response = await axios.get(`${BASE_URL}get-expense/${email}`)
         setExpenses(response.data)
         console.log(response.data)
     }
 
     const deleteExpense = async (id) => {
         const res  = await axios.delete(`${BASE_URL}delete-expense/${id}`)
-        getExpense()
+        getExpense(user.email)
     }
 
     const totalExpenses = () => {

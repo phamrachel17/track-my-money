@@ -3,7 +3,7 @@ import { firebaseAuthContext } from '../Context/firebaseAuthContext'
 
 export const useAuthContext = () => {
     const context = useContext(firebaseAuthContext);
-    debugger;
+    //debugger;
     if (!context) {
         throw Error('useAuthContext must be used inside a FirebaseAuthProvider')
     }

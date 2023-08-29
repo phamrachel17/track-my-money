@@ -5,15 +5,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from '../../Context/globalContext';
 import Button from '../Button/Button';
 import { plus } from '../../Utils/icons';
+import { useAuthContext } from '../../Hooks/useAuthContext'
 
 function ExpenseForm() {
     const {addExpense, error, setError} = useGlobalContext()
+    const user = useAuthContext();
+    const userEmail = user.email
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
         date: '',
         category: '',
         description: '',
+        email: userEmail,
     })
 
     const { title, amount, date, category,description } = inputState;
@@ -32,6 +36,7 @@ function ExpenseForm() {
             date: '',
             category: '',
             description: '',
+            email: userEmail,
         })
     }
 

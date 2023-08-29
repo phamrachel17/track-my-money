@@ -4,15 +4,16 @@ import { InnerLayout } from '../../Styles/Layout'
 import { useGlobalContext } from '../../Context/globalContext'
 import IncomeItem from '../IncomeItem/IncomeItem'
 import ExpenseForm from '../Form/ExpenseForm'
-// import { useAuthContext } from '../../Context/authContext'
+import { useAuthContext } from '../../Hooks/useAuthContext'
 
 function Expenses() {
-    const {addExpense, expenses, getExpense, deleteExpense, totalExpenses} = useGlobalContext()
-    // const { user } = useAuthContext()
+    const user = useAuthContext();
+    const { expenses, getExpense, deleteExpense, totalExpenses} = useGlobalContext()
 
     useEffect(() =>{
-        getExpense()
+        getExpense(user.email)
     }, [])
+    
     return (
         <ExpenseStyled>
             <InnerLayout>

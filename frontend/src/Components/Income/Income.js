@@ -4,13 +4,15 @@ import { InnerLayout } from '../../Styles/Layout'
 import { useGlobalContext } from '../../Context/globalContext'
 import IncomeItem from '../IncomeItem/IncomeItem'
 import Form from '../Form/IncomeForm'
+import { useAuthContext } from '../../Hooks/useAuthContext'
 
 function Income() {
-    const {addIncome, incomes, getIncomes, deleteIncome, totalIncome} = useGlobalContext()
+    const {incomes, getIncomes, deleteIncome, totalIncome} = useGlobalContext()
     // const { user } = useAuthContext()
-    
+    const user = useAuthContext();
+
     useEffect(() =>{        // hook to get data from backend/database
-        getIncomes()
+        getIncomes(user.email)
     }, [])
     
     return (

@@ -4,18 +4,25 @@ import { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { useGlobalContext } from '../../Context/globalContext';
+import { useAuthContext } from '../../Hooks/useAuthContext'
 import Button from '../Button/Button';
 import { plus } from '../../Utils/icons';
 
 function Form() {
+    const user = useAuthContext();
+    const userEmail = user.email
     const {addIncome, getIncomes, error, setError} = useGlobalContext()
+    debugger;
     const [inputState, setInputState] = useState({
         title: '',
         amount: '',
         date: '',
         category: '',
         description: '',
+        email: userEmail,
     })
+
+    console.log(userEmail)
 
     const { title, amount, date, category,description } = inputState;
 
@@ -34,6 +41,7 @@ function Form() {
             date: '',
             category: '',
             description: '',
+            email: userEmail,
         })
     }
 

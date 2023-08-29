@@ -27,6 +27,7 @@ ChartJs.register(
 )
 
 function Chart() {
+    debugger;
     const {incomes, expenses} = useGlobalContext()
 
     const data = {

@@ -6,7 +6,7 @@ const { addUser, getUser } = require('../controllers/userController')
 const router = express.Router()
 
 // Login route
-router.post('/login', getUser)
+router.get('/login', getUser)
 
 // Signup Route
 router.post('/signup', addUser)

@@ -2,13 +2,14 @@ const IncomeSchema = require('../models/incomeModel')
 
 exports.addIncome = async (req, res) => {
     //console.log(req.body);
-    const { title, amount, category, description, date } = req.body
+    const { title, amount, category, description, date, email } = req.body
     const income = IncomeSchema({
         title,
         amount,
         category,
         description,
-        date
+        date,
+        email
     })
     try {
         // validations
@@ -27,8 +28,10 @@ exports.addIncome = async (req, res) => {
 }
 
 exports.getIncomes = async (req, res) => {
+    console.log(req.params)
+    const {email} = req.params;
     try {
-        const incomes = await IncomeSchema.find().sort({createdAt: -1})
+        const incomes = await IncomeSchema.find({email: email}).sort({createdAt: -1})
         res.status(200).json(incomes)
     } catch (error) {
         res.status(500).json({message: 'There is a server error'})
