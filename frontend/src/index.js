@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { GlobalStyle } from './Styles/GlobalStyle';
 import { GlobalProvider } from './Context/globalContext';
-
+import FirebaseAuthProvider from './Context/firebaseAuthContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
+    <FirebaseAuthProvider>
     <GlobalStyle />
     <GlobalProvider>
       <App />
     </GlobalProvider>
+    </FirebaseAuthProvider>
   </React.StrictMode>
 );
 

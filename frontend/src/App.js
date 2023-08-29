@@ -7,42 +7,15 @@ import Navigation from './Components/Navigation/Navigation';
 import Income from './Components/Income/Income';
 import Expenses from './Components/Expenses/Expenses';
 import Dashboard from './Components/Dashboard/Dashboard';
-// import firebase from "firebase/app"
-// import "firebase/auth"
+import Login from './Components/Login/Login';
 import { useGlobalContext } from './Context/globalContext';
+import { useAuthContext } from './Hooks/useAuthContext.js'
+// import { auth } from "../../Firebase";
+// import { signInWithPopup } from "firebase/auth";
+// import { GoogleAuthProvider } from 'firebase/auth'
 
 function App() {
-  
-  // const [auth, setAuth] = useState(
-	// 	false || window.localStorage.getItem('auth') === 'true'
-	// );
-	// const [token, setToken] = useState('');
-
-	// useEffect(() => {
-	// 	firebase.auth().onAuthStateChanged((userCred) => {
-	// 		if (userCred) {
-	// 			setAuth(true);
-	// 			window.localStorage.setItem('auth', 'true');
-  //       setActive(0);
-	// 			userCred.getIdToken().then((token) => {
-	// 				setToken(token);
-	// 			});
-	// 		}
-	// 	});
-	// }, []);
-
-	// const loginWithGoogle = () => {
-	// 	firebase
-	// 		.auth()
-	// 		.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-	// 		.then((userCred) => {
-	// 			if (userCred) {
-	// 				setAuth(true);
-	// 				window.localStorage.setItem('auth', 'true');
-  //         setActive(1);
-	// 			}
-	// 		});
-	// };
+  const user = useAuthContext();
   
   // active state for navigation
   const [active, setActive] = useState(1)  // starts at 1 becuase first menu item is 1
@@ -76,7 +49,7 @@ function App() {
       <MainLayout>
         <Navigation active={active} setActive={setActive} />
         <main>
-          {displayData()}
+          {user && displayData()}
         </main>
       </MainLayout>
     </AppStyled>

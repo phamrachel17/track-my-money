@@ -11,9 +11,16 @@ const GlobalContext = React.createContext()
 
 export const GlobalProvider = ({children}) => {
 
+    const [user, setUser] = useState(null)
     const [incomes, setIncomes] = useState([])
     const [expenses, setExpenses] = useState([])
     const [error, setError] = useState(null)
+
+    // setting user
+    const loginUser = async (user) => {
+        const response = await axios.post(`${BASE_URL}login`, user)
+        setUser(response.data)
+    }
 
     //calculate incomes
     const addIncome = async (income) => {
@@ -91,6 +98,7 @@ export const GlobalProvider = ({children}) => {
 
     return (
         <GlobalContext.Provider value={{
+            loginUser,
             addIncome,
             getIncomes,
             incomes,
@@ -112,5 +120,5 @@ export const GlobalProvider = ({children}) => {
 }
 
 export const useGlobalContext = () =>{
-    return useContext(GlobalContext)
+    return useContext(GlobalContext)        // useContext function activates the context
 }

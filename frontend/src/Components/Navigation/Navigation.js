@@ -3,16 +3,38 @@ import styled from 'styled-components'
 import pfp from '../../Images/pfp.jpeg'
 import { menuItems } from '../../Utils/menuitems'
 import {signout} from '../../Utils/icons'
-// import { useAuthContext } from '../../Context/authContext'
+import { useAuthContext } from '../../Hooks/useAuthContext.js'
+import { auth } from "../../Firebase";
+import { signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider } from 'firebase/auth'
+import firebase from "firebase/compat/app";
 
 function Navigation({active, setActive}) {
-    // const { user } = useAuthContext();
+    const user = useAuthContext();
+
+    const googleAuthProvider = new GoogleAuthProvider();
+    const loginWithGoogle = () => {
+        signInWithPopup(auth, googleAuthProvider)
+            .then((userCred) => {
+                if (userCred) {
+                    console.log(userCred);
+                }
+                else {
+                    console.log("Auth issue")
+                }
+            })
+    }
+
+    const signOut = () => {
+        auth.signOut();
+    }
+
     return (
         <NavStyled>
             <div className="user-container">
                 <img src={pfp} alt="" />
                 <div className="text">
-                    <h2>Rachel</h2>
+                    <h2>{user ? (user.displayName) :  ('Please Sign In')}</h2>
                     <p>Your Money</p>
                 </div>
             </div>
@@ -30,7 +52,17 @@ function Navigation({active, setActive}) {
             </ul>
             <div className="bottom-nav">
                 <li>
-                    {signout} Sign Out
+                    {user ? (
+                        <button className='sign-out' onClick={signOut}>Sign Out</button>
+                    ) : (
+                        <span className='sign-out' onClick={loginWithGoogle}>Sign in</span>
+                    )}
+                    {/* {signout} Sign Out */}
+                </li>
+                <li>
+                    <span>
+                        {user ? (user.displayName) :  ('Please Sign In')}
+                    </span>
                 </li>
             </div>
         </NavStyled>

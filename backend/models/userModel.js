@@ -11,10 +11,6 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true   // removes white space
     },
-    uid: {
-        type: String,
-        required: true,
-    },
     displaypicture: {
         type: String
     },
