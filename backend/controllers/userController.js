@@ -1,4 +1,5 @@
-import UserSchema from '../models/userModel.js'
+const UserSchema = require('../models/userModel')
+
 exports.addUser = async (req, res) => {
     //console.log(req.body);
     const {name, email, displaypicture} = req.body
@@ -41,4 +42,3 @@ exports.getUser = async (req, res) => {
 // }
 
 
-module.exports = { addUser, getUser }

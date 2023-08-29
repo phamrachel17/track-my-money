@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -16,4 +16,4 @@ const userSchema = new mongoose.Schema({
     },
     }, {timestamps: true})      // activate timestamp when we create/update an item
 
-    module.exports = mongoose.model('User', userSchema)
+    module.exports = mongoose.model('User', UserSchema)
