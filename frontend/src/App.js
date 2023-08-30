@@ -1,6 +1,6 @@
 import React, {useState, useMemo} from 'react';   // useState is a hook that allows us to use state in a functional component
 import styled from 'styled-components';
-import bg from './Images/bg.jpeg'
+import bg from './Images/bg.jpg'
 import { MainLayout } from './Styles/Layout';
 import Orb from './Components/Orb/Orb';
 import Navigation from './Components/Navigation/Navigation';
@@ -10,9 +10,6 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import { useGlobalContext } from './Context/globalContext';
 import { useAuthContext } from './Hooks/useAuthContext.js'
-// import { auth } from "../../Firebase";
-// import { signInWithPopup } from "firebase/auth";
-// import { GoogleAuthProvider } from 'firebase/auth'
 
 function App() {
   const user = useAuthContext();
@@ -43,14 +40,19 @@ function App() {
   const orbMemo = useMemo(() => {     // so that the background does not reset each time the active state changes
     return <Orb />
   }, [])
+  
   return (
     <AppStyled bg={bg} className="App">
       {orbMemo}
       <MainLayout>
-        <Navigation active={active} setActive={setActive} />
-        <main>
-          {user && displayData()}
-        </main>
+        {user ? (
+          <>
+            <Navigation active={active} setActive={setActive} />
+            <main>{displayData()}</main>
+          </>
+        ) : (
+          <Login />
+        )}
       </MainLayout>
     </AppStyled>
   );

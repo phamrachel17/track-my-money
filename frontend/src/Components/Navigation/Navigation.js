@@ -8,6 +8,7 @@ import { auth } from "../../Firebase";
 import { signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from 'firebase/auth'
 import firebase from "firebase/compat/app";
+import Button from 'react-bootstrap/Button';
 
 function Navigation({active, setActive}) {
     const user = useAuthContext();
@@ -53,16 +54,10 @@ function Navigation({active, setActive}) {
             <div className="bottom-nav">
                 <li>
                     {user ? (
-                        <button className='sign-out' onClick={signOut}>Sign Out</button>
+                        <Button className='sign-out' onClick={signOut}>Sign Out</Button>
                     ) : (
                         <span className='sign-out' onClick={loginWithGoogle}>Sign in</span>
                     )}
-                    {/* {signout} Sign Out */}
-                </li>
-                <li>
-                    <span>
-                        {user ? (user.displayName) :  ('Please Sign In')}
-                    </span>
                 </li>
             </div>
         </NavStyled>
