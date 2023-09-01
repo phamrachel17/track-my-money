@@ -96,6 +96,55 @@ export const GlobalProvider = ({children}) => {
         return history.slice(0, 3)
     }
 
+    // Monthly data calculations for the past 6 months
+    const monthlyExpenses = () => {
+        const currentDate = new Date();
+        let past6MonthsExpenses = [];
+
+        for (let i = 0; i < 6; i++) {
+            let month = currentDate.getMonth() - i;
+            let year = currentDate.getFullYear();
+
+            if (month < 0) {
+                // If the month goes negative, adjust the year accordingly
+                month += 12;
+                year -= 1;
+            }
+
+            let monthlyExpense = 0;
+
+            expenses.forEach((expense) => {
+                const expenseDate = new Date(expense.date);
+                if (
+                    expenseDate.getFullYear() === year &&
+                    expenseDate.getMonth() === month
+                ) {
+                    monthlyExpense += expense.amount;
+                }
+            });
+
+            past6MonthsExpenses.push(monthlyExpense);
+        }
+        console.log(past6MonthsExpenses)
+        return past6MonthsExpenses;
+    };
+
+    // // monthly data calculations
+    // const monthlyExpense = () => {
+    //     let monthlyExpense = 0;
+    //     const currentDate = new Date();
+    //     expenses.forEach((expense) => {
+    //         const expenseDate = new Date(expense.date)
+    //         if (
+    //             expenseDate.getMonth() == currentDate.getMonth () &&
+    //             expenseDate.getFullYear() == currentDate.getFullYear()
+    //         ) {
+    //             monthlyExpense += expense.amount;
+    //         }
+    //     })
+    //     return monthlyExpense;
+    // }
+
 
     return (
         <GlobalContext.Provider value={{
@@ -113,7 +162,8 @@ export const GlobalProvider = ({children}) => {
             totalBalance,
             transactionHistory,
             error,
-            setError
+            setError,
+            monthlyExpenses
         }}>
             {children}
         </GlobalContext.Provider>

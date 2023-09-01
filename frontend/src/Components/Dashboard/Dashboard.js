@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useGlobalContext } from '../../Context/globalContext';
-import History from '../History/History';
+import History from './History';
 import { InnerLayout } from '../../Styles/Layout';
 import { dollar } from '../../Utils/icons';
-import Chart from '../Chart/Chart';
+import Chart from './Chart';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 
 function Dashboard() {

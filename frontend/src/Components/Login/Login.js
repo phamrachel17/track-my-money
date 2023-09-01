@@ -17,7 +17,7 @@ const { ThemeProvider, withStyles } = reactJss;
 const { FaChessBishop, FaPlusCircle, FaArrowLeft } = reactIconsFa;
 const { RiMoonClearLine, RiSunLine } = reactIconsRi;
 
-function Login({active, setActive}) {
+function Login() {
 
     const user = useAuthContext();
 

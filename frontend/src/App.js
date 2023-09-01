@@ -8,6 +8,7 @@ import Income from './Components/Income/Income';
 import Expenses from './Components/Expenses/Expenses';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
+import MonthlyData from './Components/MonthlyData/MonthlyData';
 import { useGlobalContext } from './Context/globalContext';
 import { useAuthContext } from './Hooks/useAuthContext.js'
 
@@ -23,12 +24,10 @@ function App() {
   // Display data based on active state of navigation selection
   const displayData = () => {
     switch(active) {
-      case 0:
-        return <Dashboard />
       case 1:
         return <Dashboard />
       case 2:
-        return <Dashboard />
+        return <MonthlyData />
       case 3:
         return <Income />
       case 4:
