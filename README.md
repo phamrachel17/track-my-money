@@ -6,7 +6,7 @@
 #### > npm start
 
 ### frontend: 
-#### > npm install axios chart.js moment react-chartjs-2 react-datepicker styled-components
+#### > npm install firebase axios chart.js moment react-chartjs-2 react-datepicker styled-components
 #### > npm start
 
 ## Configuration
