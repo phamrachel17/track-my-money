@@ -125,25 +125,80 @@ export const GlobalProvider = ({children}) => {
 
             past6MonthsExpenses.push(monthlyExpense);
         }
-        console.log(past6MonthsExpenses)
         return past6MonthsExpenses;
-    };
+    }
 
-    // // monthly data calculations
-    // const monthlyExpense = () => {
-    //     let monthlyExpense = 0;
-    //     const currentDate = new Date();
-    //     expenses.forEach((expense) => {
-    //         const expenseDate = new Date(expense.date)
-    //         if (
-    //             expenseDate.getMonth() == currentDate.getMonth () &&
-    //             expenseDate.getFullYear() == currentDate.getFullYear()
-    //         ) {
-    //             monthlyExpense += expense.amount;
-    //         }
-    //     })
-    //     return monthlyExpense;
-    // }
+    // calculate expense by category for current month
+    const totalExpenseByCategory = (expenseCategory) => {
+        const totalExpenseByCategory = {};
+        const currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+      
+        expenses.forEach((expense) => {
+          const { category, amount, date } = expense;
+          const expenseDate = new Date(date);
+      
+          if (
+            category === expenseCategory &&
+            expenseDate.getMonth() === currentMonth &&
+            expenseDate.getFullYear() === currentYear
+            ) {
+            if (!totalExpenseByCategory[expenseCategory]) {
+              totalExpenseByCategory[expenseCategory] = 0;
+            }
+            totalExpenseByCategory[expenseCategory] += amount;
+          }
+        });
+      
+        return totalExpenseByCategory[expenseCategory] || 0;
+      };
+    
+    // calculate past average by category
+    const calculatePastAverageByCategory = (expenseCategory) => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+        
+        // Filter expenses for the specified category
+        const categoryExpenses = expenses.filter((expense) => expense.category === expenseCategory);
+        
+        // Group category expenses by year and month
+        const expensesByMonth = {};
+        categoryExpenses.forEach((expense) => {
+            const expenseDate = new Date(expense.date);
+            const year = expenseDate.getFullYear();
+            const month = expenseDate.getMonth();
+            const monthYearKey = `${year}-${month}`;
+        
+            if (!expensesByMonth[monthYearKey]) {
+            expensesByMonth[monthYearKey] = [];
+            }
+        
+            expensesByMonth[monthYearKey].push(expense.amount);
+        });
+        
+        // Calculate past average for the category
+        let total = 0;
+        let numberOfMonths = 0;
+        for (let year = currentYear; year >= currentYear - 1; year--) {
+            for (let month = (year === currentYear ? currentMonth : 11); month >= 0; month--) {
+            const monthYearKey = `${year}-${month}`;
+            if (expensesByMonth[monthYearKey]) {
+                total += expensesByMonth[monthYearKey].reduce((sum, amount) => sum + amount, 0);
+                numberOfMonths++;
+            }
+            }
+        }
+        
+        if (numberOfMonths === 0) {
+            return 0; // No data available for past average
+        }
+        
+        const pastAverage = total / numberOfMonths;
+        return pastAverage;
+    };
+      
 
 
     return (
@@ -163,7 +218,9 @@ export const GlobalProvider = ({children}) => {
             transactionHistory,
             error,
             setError,
-            monthlyExpenses
+            monthlyExpenses,
+            totalExpenseByCategory,
+            calculatePastAverageByCategory
         }}>
             {children}
         </GlobalContext.Provider>
